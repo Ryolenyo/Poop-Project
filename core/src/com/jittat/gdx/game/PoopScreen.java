@@ -19,7 +19,7 @@ public class PoopScreen extends ApplicationAdapter {
 	Texture gaugePic0;
 	Texture gaugePic1;
 	
-	Texture[] gaugeArray = {gaugePic0,gaugePic1};
+	Texture[] gaugeArray = null;
 	
 	
 	int state = 0;
@@ -51,15 +51,24 @@ public class PoopScreen extends ApplicationAdapter {
 		buttonPic3 = new Texture(button.callButton(2,0)); //s
 		buttonPic4 = new Texture(button.callButton(3,0)); //d
 		
-//		Gauge gauge = null;
-//		gaugePic0 = new Texture(gauge.Pic(0));
-//		gaugePic1 = new Texture(gauge.Pic(1));
+		Gauge gauge = null;
+		gaugePic0 = new Texture(gauge.Pic(0));
+		gaugePic1 = new Texture(gauge.Pic(1));
+		
+		gaugeArray = append(gaugeArray,gaugePic0);
 		
 		
 		
 	}
 	
 	
+
+	private Texture[] append(Texture[] gaugeArray2, Texture gaugePic02) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
 
 	public void render () {
 		batch.begin();
@@ -69,11 +78,11 @@ public class PoopScreen extends ApplicationAdapter {
 		batch.draw(buttonPic2, 150,50);
 		batch.draw(buttonPic3, 220,50);
 		batch.draw(buttonPic4, 290,50);
+		batch.draw(gaugePic0, 50,200);
 //		batch.draw(gaugeArray[0], 50,200);
 		
 		batch.end();
 	}
-	
 	
 	@Override
 	public void dispose () {
