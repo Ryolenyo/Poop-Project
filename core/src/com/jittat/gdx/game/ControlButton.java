@@ -5,7 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class ControlButton {
-	
+	Button button = null;
 	SpriteBatch batch;
 
 	public void randomInt(int state){
@@ -18,5 +18,6 @@ public class ControlButton {
 		}
 		
 	}
+	
 
 }

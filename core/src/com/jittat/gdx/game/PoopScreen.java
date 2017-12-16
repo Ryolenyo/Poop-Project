@@ -15,21 +15,23 @@ public class PoopScreen extends ApplicationAdapter {
 	
 	Button button = null;
 	Gauge gauge = null;
+	ControlButton controlButton = null;
 	
 	int state = 0;
-	int count = 0;
+	boolean count = false;
 	
 	public void update() {
-		Gauge gauge = null;
+		
 		if (Gdx.input.isKeyPressed(Keys.UP)) {
-			count += 1;
-			if (count > 2) { //delay button
-				state += 1;
-				count = 0;
-			}
-			System.out.println(count);
-			System.out.println(state);
-		}		
+			count = true;
+		}
+		if (count & Gdx.input.isKeyPressed(Keys.UP)==false)
+		{
+			state += 1;
+			count = false;
+		}
+			
+		//System.out.println(state);
 	}
 	
 	@Override
@@ -43,16 +45,20 @@ public class PoopScreen extends ApplicationAdapter {
 
 
 	public void render () {
-		
 		batch.begin();
 		update();
-//		controlButton.randomInt(state);
+		
 		batch.draw(background, 0, 0);
+		
 		batch.draw(button.buttonBox(0,0),220,120);
 		batch.draw(button.buttonBox(1,0),150,50);
 		batch.draw(button.buttonBox(2,0),220,50);
 		batch.draw(button.buttonBox(3,0),290,50);
+		
 		batch.draw(gauge.callGauge(state), 50,200);
+		
+//		controlButton.randomInt(0);
+	
 		batch.end();
 	}
 	
