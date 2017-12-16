@@ -12,12 +12,9 @@ public class PoopScreen extends ApplicationAdapter {
 	
 	SpriteBatch batch;
 	Texture background;
-	Texture buttonPic1;
-	Texture buttonPic2;
-	Texture buttonPic3;
-	Texture buttonPic4;
 	
-	Texture[] gaugeArray = new Texture[11];
+	Button button = null;
+	Gauge gauge = null;
 	
 	int state = 0;
 	int count = 0;
@@ -26,7 +23,7 @@ public class PoopScreen extends ApplicationAdapter {
 		Gauge gauge = null;
 		if (Gdx.input.isKeyPressed(Keys.UP)) {
 			count += 1;
-			if (count > 3) { //delay button
+			if (count > 2) { //delay button
 				state += 1;
 				count = 0;
 			}
@@ -40,42 +37,22 @@ public class PoopScreen extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		String x = "bg.png";
 		background = new Texture(x);
-		
-		Button button = null;
-		
-		buttonPic1 = new Texture(button.callButton(0,0)); //w
-		buttonPic2 = new Texture(button.callButton(1,0)); //a
-		buttonPic3 = new Texture(button.callButton(2,0)); //s
-		buttonPic4 = new Texture(button.callButton(3,0)); //d
-		
-		Gauge gauge = null;
-		gaugeArray[0] = new Texture(guage.Pic(0));
-		gaugeArray[1] = new Texture(guage.Pic(1));
-		gaugeArray[2] = new Texture(guage.Pic(2));
-		gaugeArray[3] = new Texture(guage.Pic(3));
-		gaugeArray[4] = new Texture(guage.Pic(4));
-		gaugeArray[5] = new Texture(guage.Pic(5));
-		gaugeArray[6] = new Texture(guage.Pic(6));
-		gaugeArray[7] = new Texture(guage.Pic(7));
-		gaugeArray[8] = new Texture(guage.Pic(8));
-		gaugeArray[9] = new Texture(guage.Pic(9));
-		gaugeArray[10] = new Texture(guage.Pic(10));
-		
-		
-		
+				
 	}
 
 
 
 	public void render () {
+		
 		batch.begin();
 		update();
+//		controlButton.randomInt(state);
 		batch.draw(background, 0, 0);
-		batch.draw(buttonPic1, 220,120);
-		batch.draw(buttonPic2, 150,50);
-		batch.draw(buttonPic3, 220,50);
-		batch.draw(buttonPic4, 290,50);
-		batch.draw(gaugeArray[state], 50,200);
+		batch.draw(button.buttonBox(0,0),220,120);
+		batch.draw(button.buttonBox(1,0),150,50);
+		batch.draw(button.buttonBox(2,0),220,50);
+		batch.draw(button.buttonBox(3,0),290,50);
+		batch.draw(gauge.callGauge(state), 50,200);
 		batch.end();
 	}
 	

@@ -1,7 +1,18 @@
 package com.jittat.gdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
 
 public class Button {
+	
+	static Texture buttonBox(int type,int color){
+		Texture buttonArray[][] = new Texture[10][2];
+		for (int x = 0 ; x < 10 ; x++) {
+			for (int y = 0 ; y < 2 ; y++) {
+				buttonArray[x][y] = new Texture(callButton(x,y));
+			}
+		}
+		return buttonArray[type][color];
+	}
 	
 	static String callButton(int type,int color) {
 		String[][] button = {
