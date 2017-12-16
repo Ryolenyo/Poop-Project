@@ -4,19 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Gauge {
-	SpriteBatch batch;
-	Texture test;
-	
-	public void create () {
-		batch = new SpriteBatch();
-		test = new Texture(Pic(0));
-	}
-	
-	public void render() {
-		batch.begin();
-		batch.draw(test,50,200);
-		batch.end();
-	}
+
 	
 	static String Pic(int state){
 		String[] gaugepic = {"G00.png",

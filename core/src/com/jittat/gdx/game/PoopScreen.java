@@ -16,27 +16,24 @@ public class PoopScreen extends ApplicationAdapter {
 	Texture buttonPic2;
 	Texture buttonPic3;
 	Texture buttonPic4;
-	Texture gaugePic0;
-	Texture gaugePic1;
 	
-	Texture[] gaugeArray = null;
-	
+	Texture[] gaugeArray = new Texture[11];
 	
 	int state = 0;
 	int count = 0;
 	
-//	public void update() {
-//		Gauge gauge = null;
-//		if (Gdx.input.isKeyPressed(Keys.UP)) {
-//			count += 1;
-//			if (count > 3) { //delay button
-//				state += 1;
-//				count = 0;
-//			}
-//			System.out.println(count);
-//			System.out.println(state);
-//		}		
-//	}
+	public void update() {
+		Gauge gauge = null;
+		if (Gdx.input.isKeyPressed(Keys.UP)) {
+			count += 1;
+			if (count > 3) { //delay button
+				state += 1;
+				count = 0;
+			}
+			System.out.println(count);
+			System.out.println(state);
+		}		
+	}
 	
 	@Override
 	public void create () {
@@ -52,35 +49,33 @@ public class PoopScreen extends ApplicationAdapter {
 		buttonPic4 = new Texture(button.callButton(3,0)); //d
 		
 		Gauge gauge = null;
-		gaugePic0 = new Texture(gauge.Pic(0));
-		gaugePic1 = new Texture(gauge.Pic(1));
-		
-		gaugeArray = append(gaugeArray,gaugePic0);
+		gaugeArray[0] = new Texture(guage.Pic(0));
+		gaugeArray[1] = new Texture(guage.Pic(1));
+		gaugeArray[2] = new Texture(guage.Pic(2));
+		gaugeArray[3] = new Texture(guage.Pic(3));
+		gaugeArray[4] = new Texture(guage.Pic(4));
+		gaugeArray[5] = new Texture(guage.Pic(5));
+		gaugeArray[6] = new Texture(guage.Pic(6));
+		gaugeArray[7] = new Texture(guage.Pic(7));
+		gaugeArray[8] = new Texture(guage.Pic(8));
+		gaugeArray[9] = new Texture(guage.Pic(9));
+		gaugeArray[10] = new Texture(guage.Pic(10));
 		
 		
 		
 	}
-	
-	
-
-	private Texture[] append(Texture[] gaugeArray2, Texture gaugePic02) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 
 
 	public void render () {
 		batch.begin();
-//		update();
+		update();
 		batch.draw(background, 0, 0);
 		batch.draw(buttonPic1, 220,120);
 		batch.draw(buttonPic2, 150,50);
 		batch.draw(buttonPic3, 220,50);
 		batch.draw(buttonPic4, 290,50);
-		batch.draw(gaugePic0, 50,200);
-//		batch.draw(gaugeArray[0], 50,200);
-		
+		batch.draw(gaugeArray[state], 50,200);
 		batch.end();
 	}
 	
