@@ -14,12 +14,14 @@ public class PoopScreen extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture background;
 	Texture poop;
+	Texture over;
 	
 	Button button = null;
 	Gauge gauge = null;
 	ControlButton controlButton = null;
 	
 	boolean play = true;
+	boolean gOver = false;
 	
 	int state = 0;
 	int count = 0;
@@ -30,8 +32,10 @@ public class PoopScreen extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		String x = "bg.png";
 		String y = "poop.png";
+		String z = "over.png";
 		background = new Texture(x);
 		poop = new Texture(y);
+		over = new Texture(z);
 				
 	}
 	
@@ -164,7 +168,8 @@ public class PoopScreen extends ApplicationAdapter {
 	}
 	
 	public void gameOver() {
-		
+		play = false;
+		gOver = true;
 	}
 	
 	public void youWin() {
@@ -190,10 +195,15 @@ public class PoopScreen extends ApplicationAdapter {
 		batch.draw(button.buttonBox(6,0),780,50);
 		batch.draw(button.buttonBox(7,0),850,50);
 		
-		if (play == true)
+		if (play == true )
 			control(state);
-		else
-			batch.draw(poop,300,500);
+		else {
+			if (gOver == false)
+				batch.draw(poop,300,500);
+			else
+				batch.draw(over,300,500);
+		}
+			
 		
 		
 		batch.draw(gauge.callGauge(state), 50,200); //update gauge
