@@ -37,10 +37,13 @@ public class PoopScreen extends ApplicationAdapter {
 	private Music music;
 	private Sound yes;
 	private Sound no;
+	private Sound win;
+	private Sound fail;
 	
 	private Integer worldTimer = 60;
 	private float timeCount;
 	
+	int maxpoint = 10;
 	
 	
 	@Override
@@ -52,14 +55,16 @@ public class PoopScreen extends ApplicationAdapter {
 		background = new Texture(x);
 		poop = new Texture(y);
 		over = new Texture(z);
+	
 		
 		music = Gdx.audio.newMusic(Gdx.files.internal("BGM.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.8f);
-		music.play();
 		
 		yes = Gdx.audio.newSound(Gdx.files.internal("yes.mp3"));
 		no = Gdx.audio.newSound(Gdx.files.internal("no.mp3"));
+		win = Gdx.audio.newSound(Gdx.files.internal("win.mp3"));
+		fail = Gdx.audio.newSound(Gdx.files.internal("fail.mp3"));
 		
 		font = new BitmapFont();
 		font.setColor(Color.WHITE);
@@ -70,7 +75,7 @@ public class PoopScreen extends ApplicationAdapter {
 	int n = rand.nextInt(4);
 		
 	public void control(int st) {
-		if (point == 20) {
+		if (point == maxpoint) {
 			n = rand.nextInt(8);
 			choose(n);
 		}
@@ -204,7 +209,7 @@ public class PoopScreen extends ApplicationAdapter {
 	
 	public void upPoint() {
 		point ++;
-		if (point == 20) {
+		if (point == maxpoint) {
 			upState();
 			control(state);
 			point = 0;
@@ -228,10 +233,12 @@ public class PoopScreen extends ApplicationAdapter {
 	public void gameOver() {
 		play = false;
 		gOver = true;
+		fail.play();
 	}
 	
 	public void youWin() {
 		play = false;
+		win.play();
 	}
 	
 
@@ -256,8 +263,10 @@ public class PoopScreen extends ApplicationAdapter {
 		if (play == true ) {
 			control(state);
 			update(System.nanoTime());
+			music.play();
 		}
 		else {
+			music.stop();
 			if (gOver == false)
 				batch.draw(poop,320,500);
 			else
@@ -280,8 +289,7 @@ public class PoopScreen extends ApplicationAdapter {
 				worldTimer--;
 			}
 			else {
-				play = false;
-				gOver = true;
+				gameOver();
 			}
 			timeCount = 0;
 		}
