@@ -268,9 +268,9 @@ public class PoopScreen extends ApplicationAdapter {
 		else {
 			music.stop();
 			if (gOver == false)
-				batch.draw(poop,320,500);
+				batch.draw(poop,0,0);
 			else
-				batch.draw(over,300,500);
+				batch.draw(over,0,0);
 		}
 			
 		font.draw(batch, "TIME:", 470, 700);
