@@ -3,6 +3,8 @@ package com.jittat.gdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.Random;
@@ -26,6 +28,7 @@ public class PoopScreen extends ApplicationAdapter {
 	int state = 0;
 	int count = 0;
 	
+	private Music music;
 	
 	@Override
 	public void create () {
@@ -36,6 +39,11 @@ public class PoopScreen extends ApplicationAdapter {
 		background = new Texture(x);
 		poop = new Texture(y);
 		over = new Texture(z);
+		
+		music = Gdx.audio.newMusic(Gdx.files.internal("BGM.mp3"));
+		music.setLooping(true);
+		music.setVolume(0.5f);
+		music.play();
 				
 	}
 	
@@ -215,6 +223,7 @@ public class PoopScreen extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		background.dispose();
+		music.dispose();
 	}
 	
 
