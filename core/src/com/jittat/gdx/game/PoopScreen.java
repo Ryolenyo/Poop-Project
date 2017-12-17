@@ -40,10 +40,10 @@ public class PoopScreen extends ApplicationAdapter {
 	private Sound win;
 	private Sound fail;
 	
-	private Integer worldTimer = 60;
+	private Integer worldTimer = 30;
 	private float timeCount;
 	
-	int maxpoint = 15;
+	int maxpoint = 10;
 	
 	
 	@Override
@@ -127,96 +127,80 @@ public class PoopScreen extends ApplicationAdapter {
 	public void inputButton(int state,String inp) {
 		if (Gdx.input.isKeyJustPressed(Keys.W)) {
 			if (inp == "w") {
-				System.out.println("y");
 				upPoint();
 				yes.play();
 			}
 			else if (inp != "w") {
-				System.out.println("nw");
 				downState();
 				no.play();
 			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.A)) {
 			if (inp == "a"){
-				System.out.println("y");
 				upPoint();
 				yes.play();
 			}
 			else if (inp != "a"){
-				System.out.println("na");
 				downState();
 				no.play();
 			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.S)) {
 			if (inp == "s"){
-				System.out.println("y");
 				upPoint();
 				yes.play();
 			}
 			else if (inp != "s"){
-				System.out.println("ns");
 				downState();
 				no.play();
 			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.D)) {
 			if (inp == "d"){
-				System.out.println("y");
 				upPoint();
 				yes.play();
 			}
 			else if (inp != "d"){
-				System.out.println("nd");
 				downState();
 				no.play();
 			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.UP)) {
 			if (inp == "up"){
-				System.out.println("y");
 				upPoint();
 				yes.play();
 			}
 			else if (inp != "up"){
-				System.out.println("nup");
 				downState();
 				no.play();
 			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
 			if (inp == "left"){
-				System.out.println("y");
 				upPoint();
 				yes.play();
 			}
 			else if (inp != "left"){
-				System.out.println("nl");
 				downState();
 				no.play();
 			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.DOWN)) {
 			if (inp == "down"){
-				System.out.println("y");
 				upPoint();
 				yes.play();
 			}
 			else if (inp != "down"){
-				System.out.println("ndo");
 				downState();
 				no.play();
 			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
 			if (inp == "right"){
-				System.out.println("y");
 				upPoint();
 				yes.play();
 			}
 			else if (inp != "right"){
-				System.out.println("nr");
 				downState();
 				no.play();
 			}
@@ -233,18 +217,17 @@ public class PoopScreen extends ApplicationAdapter {
 	
 	public void upState() {
 		state++;
-		System.out.println(state);
 		if (state==11) {
 			state = 0;
 			youWin();
 		}
 	}
 	
-	public void downState() { ///BUG	
+	public void downState() { 
 		if (state == 0) {
 			state = 0;
 		}
-		else {
+		else if (state > 5) {
 			state--;
 		}
 	}
