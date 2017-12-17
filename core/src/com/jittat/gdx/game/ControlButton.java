@@ -6,11 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class ControlButton {
 
-		public void randomInt(){
-			
-			int n = 1 ;
-			n = n+1;		
-			
-		}		
+
 
 }

@@ -6,6 +6,8 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Timer;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +22,9 @@ public class PoopScreen extends ApplicationAdapter {
 	ControlButton controlButton = null;
 	
 	int state = 0;
-	boolean count = false;
+	int count = 0;
+	
+	
 	
 	@Override
 	public void create () {
@@ -30,77 +34,69 @@ public class PoopScreen extends ApplicationAdapter {
 				
 	}
 
-	public void control(int state) {
-		int n = 0;
-		for (int i = 0 ; i < state+1 ; i++)
-		{
-			Random rand = new Random();
+	int n = 0;
+	boolean check = true;
+	Random rand = new Random();
+	
+	public void control(int st) {
+		if (state == 11) {
 			n = rand.nextInt(4);
 			choose(n);
-			
 		}
+		else
+			choose(n);
+		
 	}
 	
-	public void delayForPress() {
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	int score = 0;
 	
 	public void choose(int toggle) {
 		int x = 0;
 		if (toggle == 0) {
 			batch.draw(button.buttonBox(0,1),220,120);
-//			inputButton(state);
+			inputButton(state,"w");
 		}
 		else if (toggle == 1){
 			batch.draw(button.buttonBox(1,1),150,50);
-//			inputButton(state);
+			inputButton(state,"a");
 		}
 		else if (toggle == 2){
 			batch.draw(button.buttonBox(2,1),220,50);
-//			inputButton(state);
+			inputButton(state,"s");
 		}
 		else if (toggle == 3){
 			batch.draw(button.buttonBox(3,1),290,50);
-//			inputButton(state);
+			inputButton(state,"d");
 		}
+		
 	}
 	
+	public void inputButton(int state,String inp) {
+		if (Gdx.input.isKeyJustPressed(Keys.W) & inp == "w") {
+			System.out.println("W");
+			upState();
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.A) & inp == "a") {
+			System.out.println("A");
+			upState();
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.S) & inp == "s") {
+			System.out.println("S");
+			upState();
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.D) & inp == "d") {
+			System.out.println("D");
+			upState();
+		}
+	}
 	
 	public void upState() {
 		state++;
-		if (state==11)
+		if (state==11) {
+			control(state);
 			state = 0;
-	}
-	
-	String[] inputButtonFromPlayer = new String[11];
-	
-	public void inputButton(int state) {
-
-		if (Gdx.input.isKeyJustPressed(Keys.W)) {
-			System.out.println("W");
-			inputButtonFromPlayer[state] = "w";
-			upState();
 		}
-		else if (Gdx.input.isKeyJustPressed(Keys.A)) {
-			System.out.println("A");
-			inputButtonFromPlayer[state] = "a";
-			upState();
-		}
-		else if (Gdx.input.isKeyJustPressed(Keys.S)) {
-			System.out.println("S");
-			inputButtonFromPlayer[state] = "s";
-			upState();
-		}
-		else if (Gdx.input.isKeyJustPressed(Keys.D)) {
-			System.out.println("D");
-			inputButtonFromPlayer[state] = "d";
-			upState();
-		}
+		
 	}
 	
 
@@ -119,7 +115,7 @@ public class PoopScreen extends ApplicationAdapter {
 		
 		control(state); //show sequence with red button
 		
-		inputButton(state);
+//		inputButton(state);
 		
 		batch.draw(gauge.callGauge(state), 50,200); //update gauge
 		
