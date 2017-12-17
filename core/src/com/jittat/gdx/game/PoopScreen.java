@@ -63,6 +63,7 @@ public class PoopScreen extends ApplicationAdapter {
 		
 		font = new BitmapFont();
 		font.setColor(Color.WHITE);
+		font.getData().scale(1);
 	}
 	
 	Random rand = new Random();
@@ -252,19 +253,20 @@ public class PoopScreen extends ApplicationAdapter {
 		batch.draw(button.buttonBox(6,0),780,50);
 		batch.draw(button.buttonBox(7,0),850,50);
 		
-		if (play == true )
+		if (play == true ) {
 			control(state);
+			update(System.nanoTime());
+		}
 		else {
 			if (gOver == false)
-				batch.draw(poop,300,500);
+				batch.draw(poop,320,500);
 			else
 				batch.draw(over,300,500);
 		}
 			
-		update(System.nanoTime());
-		font.draw(batch, "TIME:", 500, 700);
+		font.draw(batch, "TIME:", 470, 700);
 		String time = String.valueOf(worldTimer);
-		font.draw(batch, time, 500,600);
+		font.draw(batch, time, 495,650);
 		
 		batch.draw(gauge.callGauge(state), 50,200); //update gauge
 		
@@ -274,11 +276,14 @@ public class PoopScreen extends ApplicationAdapter {
 	public void update(float dt) {
 		timeCount += dt%5;
 		if (timeCount >= 35 ){
-			worldTimer--;
-			System.out.println(worldTimer);
-//			font.draw(batch, "Hello World!", 10, 10);
+			if (worldTimer != 0) {
+				worldTimer--;
+			}
+			else {
+				play = false;
+				gOver = true;
+			}
 			timeCount = 0;
-			
 		}
 	}
 	
