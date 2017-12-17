@@ -6,7 +6,10 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+
 import java.util.Random;
 
 
@@ -17,6 +20,8 @@ public class PoopScreen extends ApplicationAdapter {
 	Texture background;
 	Texture poop;
 	Texture over;
+	
+//	BitmapFont font;
 	
 	Button button = null;
 	Gauge gauge = null;
@@ -29,6 +34,13 @@ public class PoopScreen extends ApplicationAdapter {
 	int count = 0;
 	
 	private Music music;
+	private Sound yes;
+	private Sound no;
+	
+	private Integer worldTimer = 60;
+	private float timeCount;
+	
+	
 	
 	@Override
 	public void create () {
@@ -42,16 +54,20 @@ public class PoopScreen extends ApplicationAdapter {
 		
 		music = Gdx.audio.newMusic(Gdx.files.internal("BGM.mp3"));
 		music.setLooping(true);
-		music.setVolume(0.5f);
+		music.setVolume(0.8f);
 		music.play();
-				
+		
+		yes = Gdx.audio.newSound(Gdx.files.internal("yes.mp3"));
+		no = Gdx.audio.newSound(Gdx.files.internal("no.mp3"));
+		
+//		font = new BitmapFont(Gdx.files.internal("data/rayanfont.fnt"), false);
 	}
 	
 	Random rand = new Random();
 	int n = rand.nextInt(4);
 		
 	public void control(int st) {
-		if (point == 10) {
+		if (point == 20) {
 			n = rand.nextInt(8);
 			choose(n);
 		}
@@ -101,60 +117,91 @@ public class PoopScreen extends ApplicationAdapter {
 	
 	public void inputButton(int state,String inp) {
 		if (Gdx.input.isKeyJustPressed(Keys.W)) {
-			if (inp == "w")
+			if (inp == "w") {
 				upPoint();
-			else if (inp != "w")
+				yes.play();
+			}
+			else if (inp != "w") {
 				downState();
+				no.play();
+			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.A)) {
-			if (inp == "a")
+			if (inp == "a"){
 				upPoint();
-			else if (inp != "a")
+				yes.play();
+			}
+			else if (inp != "a"){
 				downState();
+				no.play();
+			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.S)) {
-			if (inp == "s")
+			if (inp == "s"){
 				upPoint();
-			else if (inp != "d")
+				yes.play();
+			}
+			else if (inp != "d"){
 				downState();
+				no.play();
+			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.D)) {
-			if (inp == "d")
+			if (inp == "d"){
 				upPoint();
-			else if (inp != "d")
+				yes.play();
+			}
+			else if (inp != "d"){
 				downState();
+				no.play();
+			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.UP)) {
-			if (inp == "up")
+			if (inp == "up"){
 				upPoint();
-			else if (inp != "up")
+				yes.play();
+			}
+			else if (inp != "up"){
 				downState();
+				no.play();
+			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
-			if (inp == "left")
+			if (inp == "left"){
 				upPoint();
-			else if (inp != "left")
+				yes.play();
+			}
+			else if (inp != "left"){
 				downState();
+				no.play();
+			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.DOWN)) {
-			if (inp == "down")
+			if (inp == "down"){
 				upPoint();
-			else if (inp != "down")
+				yes.play();
+			}
+			else if (inp != "down"){
 				downState();
+				no.play();
+			}
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
-			if (inp == "right")
+			if (inp == "right"){
 				upPoint();
-			else if (inp != "right")
+				yes.play();
+			}
+			else if (inp != "right"){
 				downState();
+				no.play();
+			}
 		}
 		
 	}
 	
 	public void upPoint() {
 		point ++;
-		System.out.println(point);
-		if (point == 10) {
+		if (point == 20) {
 			upState();
 			control(state);
 			point = 0;
@@ -169,7 +216,7 @@ public class PoopScreen extends ApplicationAdapter {
 		}
 	}
 	
-	public void downState() { ///////COMING SOON	
+	public void downState() { ///BUG	
 		if (state>9) {
 			state = state - 1;
 		}
@@ -212,11 +259,23 @@ public class PoopScreen extends ApplicationAdapter {
 				batch.draw(over,300,500);
 		}
 			
-		
+		update(System.nanoTime());
+//		font.draw(batch, "hello", 400,500);
 		
 		batch.draw(gauge.callGauge(state), 50,200); //update gauge
 		
 		batch.end();
+	}
+	
+	public void update(float dt) {
+		timeCount += dt%5;
+		if (timeCount >= 35 ){
+			worldTimer--;
+			System.out.println(worldTimer);
+//			font.draw(batch, "Hello World!", 10, 10);
+			timeCount = 0;
+			
+		}
 	}
 	
 	@Override
