@@ -38,8 +38,8 @@ public class PoopScreen extends ApplicationAdapter {
 	int n = rand.nextInt(4);
 		
 	public void control(int st) {
-		if (state == 11) {
-			n = rand.nextInt(4);
+		if (point == 10) {
+			n = rand.nextInt(8);
 			choose(n);
 		}
 		else
@@ -51,48 +51,90 @@ public class PoopScreen extends ApplicationAdapter {
 	
 	public void choose(int toggle) {
 		if (toggle == 0) {
-			batch.draw(button.buttonBox(0,1),220,120);
+			batch.draw(button.buttonBox(0,1),200,120);
 			inputButton(state,"w");
 		}
 		else if (toggle == 1){
-			batch.draw(button.buttonBox(1,1),150,50);
+			batch.draw(button.buttonBox(1,1),130,50);
 			inputButton(state,"a");
 		}
 		else if (toggle == 2){
-			batch.draw(button.buttonBox(2,1),220,50);
+			batch.draw(button.buttonBox(2,1),200,50);
 			inputButton(state,"s");
 		}
 		else if (toggle == 3){
-			batch.draw(button.buttonBox(3,1),290,50);
+			batch.draw(button.buttonBox(3,1),270,50);
 			inputButton(state,"d");
+		}
+		else if (toggle == 4) {
+			batch.draw(button.buttonBox(4,1),780,120);
+			inputButton(state,"up");
+		}
+		else if (toggle == 5){
+			batch.draw(button.buttonBox(5,1),710,50);
+			inputButton(state,"left");
+		}
+		else if (toggle == 6){
+			batch.draw(button.buttonBox(6,1),780,50);
+			inputButton(state,"down");
+		}
+		else if (toggle == 7){
+			batch.draw(button.buttonBox(7,1),850,50);
+			inputButton(state,"right");
 		}
 		
 	}
 	
+	int point = 0;
+	
 	public void inputButton(int state,String inp) {
 		if (Gdx.input.isKeyJustPressed(Keys.W) & inp == "w") {
 			System.out.println("W");
-			upState();
+			upPoint();
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.A) & inp == "a") {
 			System.out.println("A");
-			upState();
+			upPoint();
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.S) & inp == "s") {
 			System.out.println("S");
-			upState();
+			upPoint();
 		}
 		else if (Gdx.input.isKeyJustPressed(Keys.D) & inp == "d") {
 			System.out.println("D");
-			upState();
+			upPoint();
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.UP) & inp == "up") {
+			System.out.println("Up");
+			upPoint();
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.LEFT) & inp == "left") {
+			System.out.println("Left");
+			upPoint();
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.DOWN) & inp == "down") {
+			System.out.println("Down");
+			upPoint();
+		}
+		else if (Gdx.input.isKeyJustPressed(Keys.RIGHT) & inp == "right") {
+			System.out.println("Right");
+			upPoint();
 		}
 	
+	}
+	
+	public void upPoint() {
+		point ++;
+		if (point == 10) {
+			upState();
+			control(state);
+			point = 0;
+		}
 	}
 	
 	public void upState() {
 		state++;
 		if (state==11) {
-			control(state);
 			state = 0;
 		}
 	}
@@ -110,10 +152,15 @@ public class PoopScreen extends ApplicationAdapter {
 		
 		///////////////BUTTON///////////////
 				
-		batch.draw(button.buttonBox(0,0),220,120);
-		batch.draw(button.buttonBox(1,0),150,50);
-		batch.draw(button.buttonBox(2,0),220,50);
-		batch.draw(button.buttonBox(3,0),290,50);
+		batch.draw(button.buttonBox(0,0),200,120);
+		batch.draw(button.buttonBox(1,0),130,50);
+		batch.draw(button.buttonBox(2,0),200,50);
+		batch.draw(button.buttonBox(3,0),270,50);
+		
+		batch.draw(button.buttonBox(4,0),780,120);
+		batch.draw(button.buttonBox(5,0),710,50);
+		batch.draw(button.buttonBox(6,0),780,50);
+		batch.draw(button.buttonBox(7,0),850,50);
 		
 		control(state); //show sequence with red button
 		
