@@ -33,11 +33,10 @@ public class PoopScreen extends ApplicationAdapter {
 		background = new Texture(x);
 				
 	}
-
-	int n = 0;
-	boolean check = true;
-	Random rand = new Random();
 	
+	Random rand = new Random();
+	int n = rand.nextInt(4);
+		
 	public void control(int st) {
 		if (state == 11) {
 			n = rand.nextInt(4);
@@ -51,7 +50,6 @@ public class PoopScreen extends ApplicationAdapter {
 	int score = 0;
 	
 	public void choose(int toggle) {
-		int x = 0;
 		if (toggle == 0) {
 			batch.draw(button.buttonBox(0,1),220,120);
 			inputButton(state,"w");
@@ -88,6 +86,7 @@ public class PoopScreen extends ApplicationAdapter {
 			System.out.println("D");
 			upState();
 		}
+	
 	}
 	
 	public void upState() {
@@ -96,7 +95,10 @@ public class PoopScreen extends ApplicationAdapter {
 			control(state);
 			state = 0;
 		}
-		
+	}
+	
+	public void downState() { ///////COMING SOON
+		state--;		
 	}
 	
 
