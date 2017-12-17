@@ -3,34 +3,35 @@ package com.jittat.gdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Timer;
-
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+
 
 public class PoopScreen extends ApplicationAdapter {
 	Gauge guage;
 	
 	SpriteBatch batch;
 	Texture background;
+	Texture poop;
 	
 	Button button = null;
 	Gauge gauge = null;
 	ControlButton controlButton = null;
 	
+	boolean play = true;
+	
 	int state = 0;
 	int count = 0;
-	
 	
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		String x = "bg.png";
+		String y = "poop.png";
 		background = new Texture(x);
+		poop = new Texture(y);
 				
 	}
 	
@@ -44,7 +45,6 @@ public class PoopScreen extends ApplicationAdapter {
 		}
 		else
 			choose(n);
-		
 	}
 	
 	int score = 0;
@@ -88,43 +88,60 @@ public class PoopScreen extends ApplicationAdapter {
 	int point = 0;
 	
 	public void inputButton(int state,String inp) {
-		if (Gdx.input.isKeyJustPressed(Keys.W) & inp == "w") {
-			System.out.println("W");
-			upPoint();
+		if (Gdx.input.isKeyJustPressed(Keys.W)) {
+			if (inp == "w")
+				upPoint();
+			else if (inp != "w")
+				downState();
 		}
-		else if (Gdx.input.isKeyJustPressed(Keys.A) & inp == "a") {
-			System.out.println("A");
-			upPoint();
+		else if (Gdx.input.isKeyJustPressed(Keys.A)) {
+			if (inp == "a")
+				upPoint();
+			else if (inp != "a")
+				downState();
 		}
-		else if (Gdx.input.isKeyJustPressed(Keys.S) & inp == "s") {
-			System.out.println("S");
-			upPoint();
+		else if (Gdx.input.isKeyJustPressed(Keys.S)) {
+			if (inp == "s")
+				upPoint();
+			else if (inp != "d")
+				downState();
 		}
-		else if (Gdx.input.isKeyJustPressed(Keys.D) & inp == "d") {
-			System.out.println("D");
-			upPoint();
+		else if (Gdx.input.isKeyJustPressed(Keys.D)) {
+			if (inp == "d")
+				upPoint();
+			else if (inp != "d")
+				downState();
 		}
-		else if (Gdx.input.isKeyJustPressed(Keys.UP) & inp == "up") {
-			System.out.println("Up");
-			upPoint();
+		else if (Gdx.input.isKeyJustPressed(Keys.UP)) {
+			if (inp == "up")
+				upPoint();
+			else if (inp != "up")
+				downState();
 		}
-		else if (Gdx.input.isKeyJustPressed(Keys.LEFT) & inp == "left") {
-			System.out.println("Left");
-			upPoint();
+		else if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
+			if (inp == "left")
+				upPoint();
+			else if (inp != "left")
+				downState();
 		}
-		else if (Gdx.input.isKeyJustPressed(Keys.DOWN) & inp == "down") {
-			System.out.println("Down");
-			upPoint();
+		else if (Gdx.input.isKeyJustPressed(Keys.DOWN)) {
+			if (inp == "down")
+				upPoint();
+			else if (inp != "down")
+				downState();
 		}
-		else if (Gdx.input.isKeyJustPressed(Keys.RIGHT) & inp == "right") {
-			System.out.println("Right");
-			upPoint();
+		else if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
+			if (inp == "right")
+				upPoint();
+			else if (inp != "right")
+				downState();
 		}
-	
+		
 	}
 	
 	public void upPoint() {
 		point ++;
+		System.out.println(point);
 		if (point == 10) {
 			upState();
 			control(state);
@@ -136,11 +153,22 @@ public class PoopScreen extends ApplicationAdapter {
 		state++;
 		if (state==11) {
 			state = 0;
+			youWin();
 		}
 	}
 	
-	public void downState() { ///////COMING SOON
-		state--;		
+	public void downState() { ///////COMING SOON	
+		if (state>9) {
+			state = state - 1;
+		}
+	}
+	
+	public void gameOver() {
+		
+	}
+	
+	public void youWin() {
+		play = false;
 	}
 	
 
@@ -162,9 +190,11 @@ public class PoopScreen extends ApplicationAdapter {
 		batch.draw(button.buttonBox(6,0),780,50);
 		batch.draw(button.buttonBox(7,0),850,50);
 		
-		control(state); //show sequence with red button
+		if (play == true)
+			control(state);
+		else
+			batch.draw(poop,300,500);
 		
-//		inputButton(state);
 		
 		batch.draw(gauge.callGauge(state), 50,200); //update gauge
 		
