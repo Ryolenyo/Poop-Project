@@ -43,7 +43,7 @@ public class PoopScreen extends ApplicationAdapter {
 	private Integer worldTimer = 60;
 	private float timeCount;
 	
-	int maxpoint = 10;
+	int maxpoint = 15;
 	
 	
 	@Override
@@ -76,7 +76,7 @@ public class PoopScreen extends ApplicationAdapter {
 		
 	public void control(int st) {
 		if (point == maxpoint) {
-			n = rand.nextInt(2); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<< set button
+			n = rand.nextInt(8); 
 			point = 0;
 			choose(n);
 		}
