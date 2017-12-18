@@ -26,7 +26,6 @@ public class PoopScreen extends ApplicationAdapter {
 	
 	Button button = null;
 	Gauge gauge = null;
-	ControlButton controlButton = null;
 	
 	boolean play = true;
 	boolean gOver = false;
